@@ -1,6 +1,6 @@
 // Rock Paper Scissors
 
-// --- Computer function --- //
+// ----- Computer random choice function ----- //
 // Randomly select between Rock, Paper, and Scissors
 
 
@@ -19,11 +19,14 @@ function computerPlay() {
         }
     }
 
-// Play a Round function
+// ----- Play a Round function ---- //
+// Ensure player input is case insensitive
 // Compare player choice and computer choice
 // Output to the console stating if the player won, tied, or loss
 
 function playRound(playerChoice, computerChoice) {
+    playerChoice = (playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1).toLowerCase());
+
     if (playerChoice === "Rock") {
         if (computerChoice === "Rock") {
             return ("Tie! You both picked Rock");
@@ -59,6 +62,12 @@ function playRound(playerChoice, computerChoice) {
     }
 }
 
-const playerChoise = "Paper";
+const playerChoice = "Rock";
 const computerChoice = computerPlay();
-console.log(playRound(playerChoise, computerChoice));
+console.log(playRound(playerChoice, computerChoice));
+
+// ----- Game Function ----- //
+// Get user input for game
+// Play game for 5 rounds
+// Track winner and loser for each round
+// Report winner and loser at the end of 5 rounds
