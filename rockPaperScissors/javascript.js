@@ -62,12 +62,54 @@ function playRound(playerChoice, computerChoice) {
     }
 }
 
-const playerChoice = "Rock";
+// const playerChoice = "Rock";
 const computerChoice = computerPlay();
-console.log(playRound(playerChoice, computerChoice));
+// console.log(playRound(playerChoice, computerChoice));
 
 // ----- Game Function ----- //
 // Get user input for game
 // Play game for 5 rounds
 // Track winner and loser for each round
 // Report winner and loser at the end of 5 rounds
+
+// Note: Currently non-functional
+// the (playRound).includes statement is not working,
+// likely because the function is not a string.
+// Either the function will need to be converted to a string,
+// or the return value in playRound will need to be changed to be more useful
+
+function game() {
+    let roundWin = 0;
+    let roundLoss = 0;
+    let roundTie = 0;
+
+    for (let i = 0; i < 5; i++) {
+        let playerChoice = prompt("Please chose Rock, Paper, or Scissors");
+        let computerChoice = computerPlay();
+
+        playRound(playerChoice, computerChoice);
+            if ((playRound).includes("win") === true) {
+                (roundWin++);
+            } else if ((playRound).includes("lose") === true) {
+                (roundLoss++);
+            } else if ((playRound).includes("Tie") === true) {
+                (roundTie++ && i--);
+            }
+        
+        while (i === 4) {
+            if (roundWin > roundLoss) {
+                  if (confirm(`You won! The score was ${roundWin}:${roundLoss}\nWould you like to play again?`) === true) {
+                        i = 0;
+                    }
+            } else if (roundWin < roundLoss) {
+                  if (confirm(`You lost! The score was ${roundWin}:${roundLoss}\nWould you like to play again?`) === true) {
+                        i = 0;
+                    }
+            } else {
+                console.log("Something went wrong. Unable to determain winner or loser.")
+            }
+        }
+    }
+}
+
+game();
