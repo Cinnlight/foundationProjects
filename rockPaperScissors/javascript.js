@@ -25,6 +25,10 @@ function computerPlay() {
 // Output to the console stating if the player won, tied, or loss
 
 function playRound(playerChoice, computerChoice) {
+    if (playerChoice === null) { // Keep program working if user hits cancel
+    console.log("You didn't pick something!");
+    return ("invalidChoice"); }
+
     playerChoice = (playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1).toLowerCase());
 
     if (playerChoice === computerChoice) {
@@ -61,9 +65,6 @@ function playRound(playerChoice, computerChoice) {
             console.log("Error: Couldn't determain winner of round.");
             return ("Error: Couldn't determain winner of round.");
         }
-    } else if (playerChoice === null) {
-        console.log("You didn't pick something!");
-        return ("invalidChoice");
     } else {
         console.log(`${playerChoice} is not valid. Please chose Rock, Paper, or Scissors.`);
         return ("invalidChoice");
