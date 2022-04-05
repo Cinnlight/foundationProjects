@@ -9,14 +9,10 @@ function computerPlay() {
     
     let randomChoice = Math.floor(Math.random() * choices.length);
         switch (randomChoice) {
-            case 0:
-                return 'Rock';
-            case 1:
-                return 'Paper';
-            case 2:
-                return 'Scissors';
-            default:
-                console.log("Computer is unable to chose!");
+            case 0: return 'Rock';
+            case 1: return 'Paper';
+            case 2: return 'Scissors';
+            default: console.log("Computer is unable to chose!");
                 break;
             
         }
