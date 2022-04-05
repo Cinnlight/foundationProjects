@@ -16,16 +16,6 @@ function computerPlay() {
                 break;
             
         }
-
-        // if (randomChoice === 0) {
-        //     return 'Rock';
-        // } else if (randomChoice === 1) {
-        //     return 'Paper';
-        // } else if (randomChoice === 2) {
-        //     return 'Scissors';
-        // } else {
-        //     console.log("Computer is unable to chose!");
-        // }
     }
 
 // ----- Play a Round function ---- //
