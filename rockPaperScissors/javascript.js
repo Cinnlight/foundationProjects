@@ -8,15 +8,28 @@ function computerPlay() {
     const choices = ["Rock", "Paper", "Scissors"];
     
     let randomChoice = Math.floor(Math.random() * choices.length);
-        if (randomChoice === 0) {
-            return 'Rock';
-        } else if (randomChoice === 1) {
-            return 'Paper';
-        } else if (randomChoice === 2) {
-            return 'Scissors';
-        } else {
-            console.log("Computer is unable to chose!");
+        switch (randomChoice) {
+            case 0:
+                return 'Rock';
+            case 1:
+                return 'Paper';
+            case 2:
+                return 'Scissors';
+            default:
+                console.log("Computer is unable to chose!");
+                break;
+            
         }
+
+        // if (randomChoice === 0) {
+        //     return 'Rock';
+        // } else if (randomChoice === 1) {
+        //     return 'Paper';
+        // } else if (randomChoice === 2) {
+        //     return 'Scissors';
+        // } else {
+        //     console.log("Computer is unable to chose!");
+        // }
     }
 
 // ----- Play a Round function ---- //
