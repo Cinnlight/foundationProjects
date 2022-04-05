@@ -99,7 +99,7 @@ function game() {
             } else if (result === "tie") {
                 (roundTie++);
             } else {
-                console.log("Error: Couldn't determine round winner within game function.");
+                console.log("Something went wrong. Couldn't determine round winner within game function.");
             }
         
         while (i === 4) {
