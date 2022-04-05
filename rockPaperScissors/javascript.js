@@ -4,9 +4,9 @@
 // Randomly select between Rock, Paper, and Scissors
 
 
-const choices = ["Rock", "Paper", "Scissors"];
-
 function computerPlay() {
+    const choices = ["Rock", "Paper", "Scissors"];
+    
     let randomChoice = Math.floor(Math.random() * choices.length);
         if (randomChoice === 0) {
             return 'Rock';
@@ -29,54 +29,58 @@ function playRound(playerChoice, computerChoice) {
 
     if (playerChoice === "Rock") {
         if (computerChoice === "Rock") {
-            return ("Tie! You both picked Rock");
+            console.log("Tie! You both chose Rock.");
+            return ("tie");
         } else if (computerChoice === "Paper") {
-            return ("You lose! Paper beats Rock");
+            console.log("You lose! Paper beats Rock");
+            return ("lose");
         } else if (computerChoice === "Scissors") {
-            return ("You win! Rock beats Scissors");
+            console.log("You win! Rock beats Scissors")
+            return ("win");
         } else {
             return ("Something went wrong here...");
         }
     } else if (playerChoice === "Paper") {
         if (computerChoice === "Rock") {
-            return ("You win! Paper beats Rock");
+            console.log ("You win! Paper beats Rock");
+            return ("win");
         } else if (computerChoice === "Paper") {
-            return ("Tie! You both picked Paper");
+            console.log("Tie! You both chose Paper");
+            return ("tie");
         } else if (computerChoice === "Scissors") {
-            return ("You lose! Scissors beats Paper");
+            console.log("You lost! Scissors beats Paper");
+            return ("lose");
         } else {
             return ("Something went wrong here...");
         }
     } else if (playerChoice === "Scissors") {
         if (computerChoice === "Rock") {
-            return ("You lose! Rock beats Scissors");
+            console.log("You lose! Rock beats Scissors");
+            return ("lose");
         } else if (computerChoice === "Paper") {
-            return ("You win! Scissors beats Paper");
+            console.log("You win! Scissors beats Paper");
+            return ("win");
         } else if (computerChoice === "Scissors") {
-            return ("Tie! You both picked Scissors");
+            console.log("Tie! You both chose Scissors");
+            return ("tie");
         } else {
-            return ("Something went wrong here...");
+            console.log("Error: Couldn't determain winner of round.");
+            return ("Error: Couldn't determain winner of round.");
         }
+    } else if (playerChoice === null) {
+        console.log("You didn't pick something!");
+        return ("tie");
     } else {
-        return (`${playerChoice} is not valid. Please chose Rock, Paper, or Scissors.`)
+        console.log(`${playerChoice} is not valid. Please chose Rock, Paper, or Scissors.`);
+        return ("tie");
     }
 }
-
-// const playerChoice = "Rock";
-const computerChoice = computerPlay();
-// console.log(playRound(playerChoice, computerChoice));
 
 // ----- Game Function ----- //
 // Get user input for game
 // Play game for 5 rounds
-// Track winner and loser for each round
+// Track ties, winner and loser for each round
 // Report winner and loser at the end of 5 rounds
-
-// Note: Currently non-functional
-// the (playRound).includes statement is not working,
-// likely because the function is not a string.
-// Either the function will need to be converted to a string,
-// or the return value in playRound will need to be changed to be more useful
 
 function game() {
     let roundWin = 0;
@@ -87,26 +91,30 @@ function game() {
         let playerChoice = prompt("Please chose Rock, Paper, or Scissors");
         let computerChoice = computerPlay();
 
-        playRound(playerChoice, computerChoice);
-            if ((playRound).includes("win") === true) {
+        let result = playRound(playerChoice, computerChoice);
+            if (result === "win") {
                 (roundWin++);
-            } else if ((playRound).includes("lose") === true) {
+            } else if (result === "lose") {
                 (roundLoss++);
-            } else if ((playRound).includes("Tie") === true) {
-                (roundTie++ && i--);
+            } else if (result === "tie") {
+                (roundTie++);
+            } else {
+                console.log("Error: Couldn't determine round winner within game function.");
             }
         
         while (i === 4) {
             if (roundWin > roundLoss) {
-                  if (confirm(`You won! The score was ${roundWin}:${roundLoss}\nWould you like to play again?`) === true) {
-                        i = 0;
-                    }
+                console.log(`You win! The score was ${roundWin}:${roundLoss} with ${roundTie} tied rounds. Refresh to play again!`);
+                i++;
             } else if (roundWin < roundLoss) {
-                  if (confirm(`You lost! The score was ${roundWin}:${roundLoss}\nWould you like to play again?`) === true) {
-                        i = 0;
-                    }
+                console.log(`You lost! The score was ${roundWin}:${roundLoss} with ${roundTie} tied rounds. Refresh to play again!`);
+                i++;
+
+            } else if (roundWin === roundLoss) {
+                console.log(`It was a tie! The score was ${roundWin}:${roundLoss} with ${roundTie} tied rounds. Refresh to play again!`);
+                i++;
             } else {
-                console.log("Something went wrong. Unable to determain winner or loser.")
+                console.log("Something went wrong. Unable to determain winner or loser at end of game.");
             }
         }
     }
