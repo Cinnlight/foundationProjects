@@ -9,10 +9,14 @@ function computerPlay() {
     
     let randomChoice = Math.floor(Math.random() * choices.length);
         switch (randomChoice) {
-            case 0: return 'Rock';
-            case 1: return 'Paper';
-            case 2: return 'Scissors';
-            default: console.log("Computer is unable to chose!");
+            case 0: 
+                return 'Rock';
+            case 1: 
+                return 'Paper';
+            case 2: 
+                return 'Scissors';
+            default: 
+                console.log("Computer is unable to chose!");
                 break;
             
         }
@@ -61,8 +65,8 @@ function playRound(playerChoice, computerChoice) {
             console.log("You win! Scissors beats Paper");
             return ("win");
         } else {
-            console.log("Error: Couldn't determain winner of round.");
-            return ("Error: Couldn't determain winner of round.");
+            console.log("Error: Couldn't determine winner of round.");
+            return ("Error: Couldn't determine winner of round.");
         }
     } else {
         console.log(`${playerChoice} is not valid. Please chose Rock, Paper, or Scissors.`);
@@ -87,19 +91,24 @@ function game() {
         let computerChoice = computerPlay();
 
         let result = playRound(playerChoice, computerChoice);
-            if (result === "win") {
-                (roundWin++);
-            } else if (result === "lose") {
-                (roundLoss++);
-            } else if (result === "tie") {
-                (roundTie++);
-            } else if (result === "invalidChoice") {
-                i--;
-            } else {
-                i = 5;
-                console.log("Something went wrong - terminating game. Couldn't determine round winner within game function.");
+            switch (result) {
+                case "win": 
+                    roundWin++;
+                    break;
+                case "lose": 
+                    roundLoss++;
+                    break;
+                case "tie": 
+                    roundTie++;
+                    break;
+                case "invalidChoice": 
+                    i--;
+                    break;
+                default: i = 5;
+                    console.log("Something went wrong - terminating game. Couldn't determine round winner within game function.");
+                    break;
             }
-        
+
         while (i === 4) {
             if (roundWin > roundLoss) {
                 console.log(`You win! The score was ${roundWin}:${roundLoss} with ${roundTie} tied rounds. Refresh to play again!`);
@@ -112,7 +121,7 @@ function game() {
                 console.log(`It was a tie! The score was ${roundWin}:${roundLoss} with ${roundTie} tied rounds. Refresh to play again!`);
                 i++;
             } else {
-                console.log("Something went wrong. Unable to determain winner or loser at end of game.");
+                console.log("Something went wrong. Unable to determine winner or loser at end of game.");
             }
         }
     }
