@@ -5,9 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="javascript.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="javascript.js" defer></script>
 </head>
 <body>
+
+    <!-- Header -->
+    <div id="header">
+        <div>Welcome! Please press a button to start playing "Rock, Paper, Scissors!"</div>
+    </div>
+
+    <!-- Buttons -->
+    <div id="content">
+        <div id="buttons">
+            <button id="rock" class="btn">Rock</button>
+            <button id="paper" class="btn">Paper</button>
+            <button id="scissors" class="btn">Scissors</button>
+        </div>
+    </div>
+
+    <!-- Round Results -->
+    <div id="resultContainer">
+        <div id="roundResult">Welcome! Press a button to begin playing.</div>
+        <div id="resultTally"></div>
+    </div>
+
+    <!-- Footer/Reset button -->
+    <div id="footer">
+        <button id="reset" class="btn">Reset</button>
+    </div>
+
     
 </body>
 </html>

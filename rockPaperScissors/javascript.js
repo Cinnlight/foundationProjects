@@ -1,5 +1,7 @@
 // Rock Paper Scissors
 
+// ----- 
+
 // ----- Computer random choice function ----- //
 // Randomly select between Rock, Paper, and Scissors
 
@@ -74,57 +76,80 @@ function playRound(playerChoice, computerChoice) {
     }
 }
 
-// ----- Game Function ----- //
+// ----- Obsolete 5-round game function ----- //
 // Get user input for game
 // Play game for 5 rounds
 // Track ties, winner and loser for each round
 // Report winner and loser at the end of 5 rounds
 
-function game() {
-    let roundWin = 0;
-    let roundLoss = 0;
-    let roundTie = 0;
-    console.log("Let's play 5 rounds of Rock, Paper Scissors!")
+// function game() {
+//     let roundWin = 0;
+//     let roundLoss = 0;
+//     let roundTie = 0;
+//     console.log("Let's play 5 rounds of Rock, Paper Scissors!")
 
-    for (let i = 0; i < 5; i++) {
-        let playerChoice = prompt("Please chose Rock, Paper, or Scissors");
+//     for (let i = 0; i < 5; i++) {
+//         let playerChoice = prompt("Please chose Rock, Paper, or Scissors"); // Replace with button choice
+//         let computerChoice = computerPlay();
+
+//         let result = playRound(playerChoice, computerChoice);
+//             switch (result) {
+//                 case "win": 
+//                     roundWin++;
+//                     break;
+//                 case "lose": 
+//                     roundLoss++;
+//                     break;
+//                 case "tie": 
+//                     roundTie++;
+//                     break;
+//                 case "invalidChoice": 
+//                     i--;
+//                     break;
+//                 default: i = 5;
+//                     console.log("Something went wrong - terminating game. Couldn't determine round winner within game function.");
+//                     break;
+//             }
+
+//         while (i === 4) {
+//             if (roundWin > roundLoss) {
+//                 console.log(`You win! The score was ${roundWin}:${roundLoss} with ${roundTie} tied rounds. Refresh to play again!`);
+//                 i++;
+//             } else if (roundWin < roundLoss) {
+//                 console.log(`You lost! The score was ${roundWin}:${roundLoss} with ${roundTie} tied rounds. Refresh to play again!`);
+//                 i++;
+
+//             } else if (roundWin === roundLoss) {
+//                 console.log(`It was a tie! The score was ${roundWin}:${roundLoss} with ${roundTie} tied rounds. Refresh to play again!`);
+//                 i++;
+//             } else {
+//                 console.log("Something went wrong. Unable to determine winner or loser at end of game.");
+//             }
+//         }
+//     }
+// }
+
+// game();
+
+// ----- Button on-click styling ----- //
+
+const buttons = document.querySelectorAll('.btn');
+const results = document.querySelector('#results');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+        event.target.classList.add('clicked');
+        let playerChoice = `${button.id}`;
         let computerChoice = computerPlay();
 
-        let result = playRound(playerChoice, computerChoice);
-            switch (result) {
-                case "win": 
-                    roundWin++;
-                    break;
-                case "lose": 
-                    roundLoss++;
-                    break;
-                case "tie": 
-                    roundTie++;
-                    break;
-                case "invalidChoice": 
-                    i--;
-                    break;
-                default: i = 5;
-                    console.log("Something went wrong - terminating game. Couldn't determine round winner within game function.");
-                    break;
-            }
+        playRound(playerChoice,computerChoice);
+        // results.textContent += `${button.id}\n`;
+    });
+});
 
-        while (i === 4) {
-            if (roundWin > roundLoss) {
-                console.log(`You win! The score was ${roundWin}:${roundLoss} with ${roundTie} tied rounds. Refresh to play again!`);
-                i++;
-            } else if (roundWin < roundLoss) {
-                console.log(`You lost! The score was ${roundWin}:${roundLoss} with ${roundTie} tied rounds. Refresh to play again!`);
-                i++;
-
-            } else if (roundWin === roundLoss) {
-                console.log(`It was a tie! The score was ${roundWin}:${roundLoss} with ${roundTie} tied rounds. Refresh to play again!`);
-                i++;
-            } else {
-                console.log("Something went wrong. Unable to determine winner or loser at end of game.");
-            }
-        }
-    }
+function removeTransition(e) {
+    if(e.propertyName !== 'transform') return;
+    this.classList.remove('clicked');
 }
 
-game();
+buttons.forEach(btn => btn.addEventListener('transitionend', removeTransition));
