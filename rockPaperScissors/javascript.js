@@ -27,56 +27,134 @@ function computerPlay() {
 // ----- Play a Round function ---- //
 // Ensure player input is case insensitive
 // Compare player choice and computer choice
-// Output to the console stating if the player won, tied, or loss
+// Return round result
+// Reflect wins/losses in UI
 
-function playRound(playerChoice, computerChoice) {
-    if (playerChoice === null) { // Keep program working if user hits cancel
-    console.log("You didn't pick something!");
-    return ("invalidChoice"); }
+    function playRound(playerChoice, computerChoice) {
 
-    playerChoice = (playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1).toLowerCase());
+        if (playerChoice === null) { // Keep program working if user hits cancel
+        console.log("You didn't pick something!");
+        return ("invalidChoice"); }
 
-    if (playerChoice === computerChoice) {
-        console.log(`Tie! You both chose ${playerChoice}`)
-        return("tie");
-    } else if (playerChoice === "Rock") {
-        if (computerChoice === "Paper") {
-            console.log("You lose! Paper beats Rock");
-            return ("lose");
-        } else if (computerChoice === "Scissors") {
-            console.log("You win! Rock beats Scissors")
-            return ("win");
+        playerChoice = (playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1).toLowerCase());
+
+        if (playerChoice === computerChoice) {
+            roundResult.textContent = `Tie! You both chose ${playerChoice}`
+            return("tie");
+        } else if (playerChoice === "Rock") {
+            if (computerChoice === "Paper") {
+                roundResult.textContent = "You lose! Paper beats Rock";
+                computerScore.textContent = cScore++;
+                return ("lose");
+            } else if (computerChoice === "Scissors") {
+                roundResult.textContent = "You win! Rock beats Scissors";
+                playerScore.textContent = pScore++;
+                return ("win");
+            } else {
+                return ("Something went wrong here...");
+            }
+        } else if (playerChoice === "Paper") {
+            if (computerChoice === "Rock") {
+                roundResult.textContent = "You win! Paper beats Rock";
+                playerScore.textContent = pScore++;
+                return ("win");
+            } else if (computerChoice === "Scissors") {
+                roundResult.textContent = "You lost! Scissors beats Paper";
+                computerScore.textContent = cScore++;
+                return ("lose");
+            } else {
+                console.log("Something went wrong here...")
+                return ("Something went wrong here...");
+            }
+        } else if (playerChoice === "Scissors") {
+            if (computerChoice === "Rock") {
+                roundResult.textContent = "You lose! Rock beats Scissors";
+                computerScore.textContent = cScore++;
+                return ("lose");
+            } else if (computerChoice === "Paper") {
+                roundResult.textContent = "You win! Scissors beats Paper";
+                playerScore.textContent = pScore++;
+                return ("win");
+            } else {
+                roundResult.textContent = "Error: Couldn't determine winner of round.";
+                return ("Error: Couldn't determine winner of round.");
+            }
+        } else if (playerChoice === "Reset") {
+            roundResult.textContent = "Welcome! Press a button to begin playing.";
+            return ("reset");
         } else {
-            return ("Something went wrong here...");
+            console.log(`${playerChoice} is not valid. Please chose Rock, Paper, or Scissors.`);
+            return ("invalidChoice");
         }
-    } else if (playerChoice === "Paper") {
-        if (computerChoice === "Rock") {
-            console.log ("You win! Paper beats Rock");
-            return ("win");
-        } else if (computerChoice === "Scissors") {
-            console.log("You lost! Scissors beats Paper");
-            return ("lose");
-        } else {
-            return ("Something went wrong here...");
-        }
-    } else if (playerChoice === "Scissors") {
-        if (computerChoice === "Rock") {
-            console.log("You lose! Rock beats Scissors");
-            return ("lose");
-        } else if (computerChoice === "Paper") {
-            console.log("You win! Scissors beats Paper");
-            return ("win");
-        } else {
-            console.log("Error: Couldn't determine winner of round.");
-            return ("Error: Couldn't determine winner of round.");
-        }
-    } else {
-        console.log(`${playerChoice} is not valid. Please chose Rock, Paper, or Scissors.`);
-        return ("invalidChoice");
     }
+
+// ----- Document selectors ----- //
+
+const buttons = document.querySelectorAll('.btn');
+const results = document.querySelector('#roundResult');
+let playerScore = document.querySelector('#playerScore');
+let computerScore = document.querySelector('#computerScore');
+let roundNumber = document.querySelector('#roundNumber');
+let playAgainText = document.querySelector('#playAgainText');
+
+// ----- Button on-click styling, run round on click ----- //
+
+let pScore = 1;
+let cScore = 1;
+let roundCount = 0;
+
+buttons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+        event.target.classList.add('clicked');
+        if (button.id === "reset") {                
+            pScore = 1;
+            cScore = 1;
+            roundCount = -1;
+            computerScore.textContent = "-";
+            playerScore.textContent = "-";
+            playAgainText.textContent = "";
+        }
+
+        let playerChoice = `${button.id}`;
+        let computerChoice = computerPlay();
+
+        if (roundCount < 4) {
+            playRound(playerChoice,computerChoice);
+            roundCount++;
+        } else if (roundCount === 4) {
+            playRound(playerChoice,computerChoice);
+            roundCount = 5;
+
+             if (pScore === cScore) {
+                roundResult.textContent = "It was a draw!";
+                playAgainText.textContent = "Press Reset to play again."
+            } else if (pScore > cScore) {
+                roundResult.textContent = `Congrats, you win with a score of ${pScore - 1}:${cScore - 1}`;
+                playAgainText.textContent = "Press Reset to play again."
+            } else if (pScore < cScore) {
+                roundResult.textContent = `You lost with a score of ${pScore - 1}:${cScore - 1}`;
+                playAgainText.textContent = "Press Reset to play again."
+            } else {
+                roundResult.textContent = `Couldn't determain game winner!`;
+            }
+        }
+
+        roundNumber.textContent = `${roundCount}`;
+    });
+});
+
+function removeTransition(e) {
+    if(e.propertyName !== 'transform') return;
+    this.classList.remove('clicked');
 }
 
-// ----- Obsolete 5-round game function ----- //
+buttons.forEach(btn => btn.addEventListener('transitionend', removeTransition));
+
+
+
+
+
+// ----- Obsolete 5-round game function, kept for reference ----- //
 // Get user input for game
 // Play game for 5 rounds
 // Track ties, winner and loser for each round
@@ -130,26 +208,3 @@ function playRound(playerChoice, computerChoice) {
 // }
 
 // game();
-
-// ----- Button on-click styling ----- //
-
-const buttons = document.querySelectorAll('.btn');
-const results = document.querySelector('#results');
-
-buttons.forEach((button) => {
-    button.addEventListener('click', (event) => {
-        event.target.classList.add('clicked');
-        let playerChoice = `${button.id}`;
-        let computerChoice = computerPlay();
-
-        playRound(playerChoice,computerChoice);
-        // results.textContent += `${button.id}\n`;
-    });
-});
-
-function removeTransition(e) {
-    if(e.propertyName !== 'transform') return;
-    this.classList.remove('clicked');
-}
-
-buttons.forEach(btn => btn.addEventListener('transitionend', removeTransition));

@@ -12,7 +12,7 @@ button {
     padding: .5rem 1rem;
     font-size: 1.2rem;
     width: 110px;
-    transition: all .07s ease;
+    transition: all .04s ease;
 }
 
 .clicked {
@@ -29,6 +29,22 @@ button {
     padding: 24px;
 }
 
+#roundContainer {
+    display: flex;
+    justify-content: right;
+}
+
 #reset {
     margin: 20px;
 }
+
+#statusContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+#scoreContainer {
+    display: flex;
+    justify-content: center;
+}
+
