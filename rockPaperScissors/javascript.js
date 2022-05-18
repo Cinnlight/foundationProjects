@@ -43,7 +43,7 @@ function computerPlay() {
             return("tie");
         } else if (playerChoice === "Rock") {
             if (computerChoice === "Paper") {
-                roundResult.textContent = "You lose! Paper beats Rock";
+                roundResult.textContent = "You lost! Paper beats Rock";
                 computerScore.textContent = cScore++;
                 return ("lose");
             } else if (computerChoice === "Scissors") {
@@ -68,7 +68,7 @@ function computerPlay() {
             }
         } else if (playerChoice === "Scissors") {
             if (computerChoice === "Rock") {
-                roundResult.textContent = "You lose! Rock beats Scissors";
+                roundResult.textContent = "You lost! Rock beats Scissors";
                 computerScore.textContent = cScore++;
                 return ("lose");
             } else if (computerChoice === "Paper") {
@@ -98,6 +98,8 @@ let roundNumber = document.querySelector('#roundNumber');
 let playAgainText = document.querySelector('#playAgainText');
 
 // ----- Button on-click styling, run round on click ----- //
+// Tally rounds won, lost, and played
+// Update elements to reflect rounds won, lost, and played
 
 let pScore = 1;
 let cScore = 1;

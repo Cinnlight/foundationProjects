@@ -4,10 +4,12 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0;
+    height: 100vh;
+    background-color: #7f4747;
 }
 
 button {
-    background-color: aliceblue;
+    background-color: #f2f5f5;
     border-radius: .2rem;
     padding: .5rem 1rem;
     font-size: 1.2rem;
@@ -15,18 +17,35 @@ button {
     transition: all .04s ease;
 }
 
+#reset {
+    padding: .4rem .8rem;
+    font-size: .96rem;
+    width: 88px;
+    margin: 0 0 20px 0;
+}
+
+/* On-click animation styling */
+
 .clicked {
     transform: scale(1.1);
     border-color: #0e7fcb;
     box-shadow: 0 0 1rem #0e7fcb;
 }
 
+/* Container with all content */
+
 #content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 24px;
+    width: 500px;
+    height: 300px;
+    margin-top: 20px;
+    background-color: #ffe5ee;
+    border: thick solid black;
+    border-radius: 10px;
 }
 
 #roundContainer {
@@ -41,6 +60,8 @@ button {
 #statusContainer {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    width: 500px;
 }
 
 #scoreContainer {
@@ -50,4 +71,17 @@ button {
 
 #playerScore {
     margin-right: 20px;
+}
+
+#roundResult {
+    align-self: center;
+}
+
+#playAgainText {
+    align-self: center;
+    height: 30px;
+}
+
+#roundResult {
+    padding-top: 10px;
 }
