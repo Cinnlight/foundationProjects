@@ -48,3 +48,6 @@ button {
     justify-content: center;
 }
 
+#playerScore {
+    margin-right: 20px;
+}
